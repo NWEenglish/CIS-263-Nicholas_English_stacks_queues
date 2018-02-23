@@ -50,22 +50,33 @@ int main(int argc, char** argv) {
 
 		/* Sends string to the functions. */
 		balancedSymbols(userInput);
-		
 	}
 
 
 	/* Convert infix to postfix. */
 	if(choice == 2)
-	
+		
+		/* Variable(s) */
+		std::string userInput;
 
-	
+		/* Gets user input for what they would like converted. */
+		std::cout << "\n Please enter what you would like converted:" << std::endl;
+		std::cin >> userInput;
+
+		/* Sends string to the function. */
+		convertExpression(userInput);
 	}
 
+	/* End of code reached. */
 	std::cout << "\n\n\n" << std::endl;
-
 }
 
-
+/**********************************************************************
+ * Function takes a string from the user and checks if the sumbols are
+ * balanced.
+ *
+ * @param input is a string that the user would like checked.
+ *********************************************************************/
 bool balancedSymbols(std::string input) {
 	/* Variable(s) */
 	stack balanceStack;
@@ -82,6 +93,19 @@ bool balancedSymbols(std::string input) {
 			if ( balanceStack.top() == input [i] )
 				balanceStack.pop();
 	}
+}
+
+/**********************************************************************
+ * Function converts an infix expression to a postfix expression. The
+ * expression being converted is provided by the user.
+ *
+ * @param input is a string that the user would like converted.
+ *********************************************************************/
+// Sources of help:
+// (1) https://www.youtube.com/watch?v=vq-nUF0G4fI
+std::string iToP(std::string input) {
+
+
 }
 
 
