@@ -25,8 +25,7 @@ int main(int argc, char** argv) {
 
 	/* Determines which method to run based on user input. */
 	std::cout << "\n Would you like to check for balanced" <<
-		"symbols or convert an infix expression to postfix?" <<
-		std::endl;
+		"symbols or convert an infix expression to postfix?" << std::endl;
 
 	std::cout << "Enter 1 or 2 respectively for the input: \t";
 	std::cin >> choice;
@@ -41,11 +40,16 @@ int main(int argc, char** argv) {
 
 	/* Check for balanced symbols. */
 	if (choice == 1) {
-		string str_checkIfBalanced;
-		int str_length = str_checkIfBalanced.length();
-		char symbols			
+	
+		/* Variable(s) */
+		std::string userInput;
 
-		for(int i = 0; i < str_length; i++) {
+		/* Gets user input for what they would like checked. */
+		std::cout << "\n Please enter what you would like checked:" << std::endl;
+		std::cin >> userInput;
+
+		/* Sends string to the functions. */
+		balancedSymbols(userInput);
 		
 	}
 
@@ -56,6 +60,8 @@ int main(int argc, char** argv) {
 
 	
 	}
+
+	std::cout << "\n\n\n" << std::endl;
 
 }
 
@@ -68,14 +74,13 @@ bool balancedSymbols(std::string input) {
 	for(int i = 0; i < input.length(); i++) {
 
 		/* What to do if an opening character. */
-		if(input[i] == '(' || input[i] == '[' || input[i] == '{') {
+		if(input[i] == '(' || input[i] == '[' || input[i] == '{')
 			balanceStack.push( input[i] );
-		}
-		
+
 		/* What to do if a closing character. */
-		if((input[i] == ')' || input[i] == ']' || input[i] == '}') {
-		
-		}
+		if((input[i] == ')' || input[i] == ']' || input[i] == '}')
+			if ( balanceStack.top() == input [i] )
+				balanceStack.pop();
 	}
 }
 
