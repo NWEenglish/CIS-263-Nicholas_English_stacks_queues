@@ -26,15 +26,12 @@ int main(int argc, char** argv) {
 	/* Determines which method to run based on user input. */
 	std::cout << "\n Would you like to check for balanced" <<
 		"symbols or convert an infix expression to postfix?" << std::endl;
-
 	std::cout << "Enter 1 or 2 respectively for the input: \t";
 	std::cin >> choice;
 
 	/* Loops until the user enters a valid input. */
 	while (choice != 1 && choice != 2) {
-		std::cout << "\n\n Invalid choice!" <<
-			<< "Please enter 1 or 2: \t"
-			<< std::endl;
+		std::cout << "\n\n Invalid choice! Please enter 1 or 2: \t"; 
 		std::cin >> choice; 
 	}
 
@@ -50,6 +47,11 @@ int main(int argc, char** argv) {
 
 		/* Sends string to the functions. */
 		balancedSymbols(userInput);
+
+		if(balancedSymbols(userInput))
+			std::cout << "\n\n Input is balanced!" << std::endl;
+		else
+			std::cout << "\n\n Input is NOT balanced!" << std::endl;
 	}
 
 
@@ -63,8 +65,10 @@ int main(int argc, char** argv) {
 		std::cout << "\n Please enter what you would like converted:" << std::endl;
 		std::cin >> userInput;
 
-		/* Sends string to the function. */
-		convertExpression(userInput);
+		/* Prints the converted expression. */
+		std::cout << "\n\n The converted expression is:" << std::endl;
+		std::cout << iToP(userInput) << std::endl;
+
 	}
 
 	/* End of code reached. */
@@ -77,6 +81,8 @@ int main(int argc, char** argv) {
  *
  * @param input is a string that the user would like checked.
  *********************************************************************/
+// Sources of help:
+// (1) http://www.cplusplus.com/reference/stack/stack/
 bool balancedSymbols(std::string input) {
 	/* Variable(s) */
 	stack balanceStack;
@@ -93,6 +99,12 @@ bool balancedSymbols(std::string input) {
 			if ( balanceStack.top() == input [i] )
 				balanceStack.pop();
 	}
+
+	/* Returns if the line is balance or not. */
+	if(balanceStack.size() == 0)
+		return true;
+	else
+		return false;
 }
 
 /**********************************************************************
@@ -104,38 +116,23 @@ bool balancedSymbols(std::string input) {
 // Sources of help:
 // (1) https://www.youtube.com/watch?v=vq-nUF0G4fI
 std::string iToP(std::string input) {
+	/* Variable(s) */
+	std::string postfix;
+	stack Operator;
 
+	/* Loops through the string looking for operators. */
+	for(int i = 0; i < input.length(); i++) {
+
+		/* Scans each character. */
+		if(input[i] == '+' || input[i] == '-' || input[i] == '*' || input[i] == '/') {
 
 }
+	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	/* Prints the converted expression. */
+	std::cout << "\n\n The expression convert to postfix would be:" << std::endl;
+	std::cout << postfix;
+}
 
 
 
