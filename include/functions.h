@@ -8,13 +8,9 @@
  *
  *********************************************************************/
 
-#ifndef __H_stacks_queues__
-#define __H_stacks_queues__
-
 #include <string>
 #include <iostream>
 
 bool balancedSymbols(std::string input);
-std::string iTop(std::string input);
+std::string iToP(std::string input);
 
-#endif // __H_stacks_queues__

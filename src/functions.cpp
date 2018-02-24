@@ -17,7 +17,7 @@
 #include <iostream>
 #include <stack>
 #include <string>
-#include <"functions.h">
+#include "functions.h"
 
 
 /**********************************************************************
@@ -33,13 +33,15 @@ bool hasHigherPriority(char top, char current);
 
 /* Main */
 int main(int argc, char** argv) {
+	
 	/* Variable(s) */
-	int choice;	// Holds the user's choice of operation.
+	int choice;
+	std::string userInput;
 
 	/* Determines which method to run based on user input. */
-	std::cout << "\n Would you like to check for balanced" <<
+	std::cout << "\n\n\n Would you like to check for balanced" <<
 		"symbols or convert an infix expression to postfix?" << std::endl;
-	std::cout << "Enter 1 or 2 respectively for the input: \t";
+	std::cout << " Enter 1 or 2 respectively for the input: \t";
 	std::cin >> choice;
 
 	/* Loops until the user enters a valid input. */
@@ -50,9 +52,6 @@ int main(int argc, char** argv) {
 
 	/* Check for balanced symbols. */
 	if (choice == 1) {
-	
-		/* Variable(s) */
-		std::string userInput;
 
 		/* Gets user input for what they would like checked. */
 		std::cout << "\n Please enter what you would like checked:" << std::endl;
@@ -69,7 +68,7 @@ int main(int argc, char** argv) {
 
 
 	/* Convert infix to postfix. */
-	if(choice == 2)
+	if(choice == 2) {
 		
 		/* Variable(s) */
 		std::string userInput;
@@ -85,7 +84,7 @@ int main(int argc, char** argv) {
 	}
 
 	/* End of code reached. */
-	std::cout << "\n\n\n" << std::endl;
+	std::cout << "\n\n\n " << std::endl;
 }
 
 /**********************************************************************
@@ -97,8 +96,9 @@ int main(int argc, char** argv) {
 // Sources of help:
 // (1) http://www.cplusplus.com/reference/stack/stack/
 bool balancedSymbols(std::string input) {
+	
 	/* Variable(s) */
-	stack<char> balanceStack;
+	std::stack<char> balanceStack;
 	
 	/* Loops through every character in the string. */
 	for(int i = 0; i < input.length(); i++) {
@@ -108,9 +108,20 @@ bool balancedSymbols(std::string input) {
 			balanceStack.push( input[i] );
 
 		/* What to do if a closing character. */
-		if((input[i] == ')' || input[i] == ']' || input[i] == '}')
-			if ( balanceStack.top() == input [i] )
+		if(input[i] == ')' || input[i] == ']' || input[i] == '}') {
+			
+			if(balanceStack.empty())
+				return false;
+
+			else if ( balanceStack.top() == '(' && input[i] == ')' )
 				balanceStack.pop();
+
+			else if ( balanceStack.top() == '[' && input[i] == ']' )
+				balanceStack.pop();
+
+			else if ( balanceStack.top() == '{' && input[i] == '}' )
+				balanceStack.pop();  
+		}
 	}
 
 	/* Returns if the line is balance or not. */
@@ -132,7 +143,7 @@ std::string iToP(std::string input) {
 	
 	/* Variable(s) */
 	std::string postfix = "";
-	stack<char> Operators;
+	std::stack<char> Operators;
 
 	/* Loops through the string looking for operators. */
 	for(int i = 0; i < input.length(); i++) {
@@ -163,8 +174,12 @@ std::string iToP(std::string input) {
 			}
 			Operators.pop();
 		}
+
+		/* Puts the remaining characters intp string. */
+		else
+			postfix += input[i];
 		
-		/* Puts the remaning characters into the string. */
+		/* Puts the remaning operators into the string. */
 		while(!Operators.empty()) {
 			postfix += Operators.top();
 			Operators.pop();
@@ -197,7 +212,7 @@ bool hasHigherPriority(char top, char current) {
 	else
 		topWeight = 1;
 	
-	if(current == '*' || current = '/')
+	if(current == '*' || current == '/')
 		currentWeight = 2;
 	else
 		currentWeight = 1;
