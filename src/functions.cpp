@@ -98,7 +98,7 @@ int main(int argc, char** argv) {
 // (1) http://www.cplusplus.com/reference/stack/stack/
 bool balancedSymbols(std::string input) {
 	/* Variable(s) */
-	stack balanceStack;
+	stack<char> balanceStack;
 	
 	/* Loops through every character in the string. */
 	for(int i = 0; i < input.length(); i++) {
@@ -129,18 +129,49 @@ bool balancedSymbols(std::string input) {
 // Sources of help:
 // (1) https://www.youtube.com/watch?v=vq-nUF0G4fI
 std::string iToP(std::string input) {
+	
 	/* Variable(s) */
-	std::string postfix;
-	stack Operator;
+	std::string postfix = "";
+	stack<char> Operators;
 
 	/* Loops through the string looking for operators. */
 	for(int i = 0; i < input.length(); i++) {
 
-		/* Scans each character. */
+		/* Scans each character to see if it's an operator. */
 		if(input[i] == '+' || input[i] == '-' || input[i] == '*' || input[i] == '/') {
 			
+			while(!Operators.empty() && Operators.top() != '(' && hasHigherPriority(Operators.top(), input[i])) {
+				postfix += Operators.top();
+				Operators.pop();
+			}
+			Operators.push(input[i]);
+		}
+		
+		/* Scans each character to see if it's a space. */
+		else if(input[i] == ' ')
+			continue;
+
+		/* Scans for an open parenthesis. */
+		else if(input[i] == '(')
+			Operators.push(input[i]);
+
+		/* Scans for a closed parenthesis. */
+		else if(input[i] == ')') {
+			while(!Operators.empty() && Operators.top() != '(') {
+				postfix += Operators.top();
+				Operators.pop();
+			}
+			Operators.pop();
+		}
+		
+		/* Puts the remaning characters into the string. */
+		while(!Operators.empty()) {
+			postfix += Operators.top();
+			Operators.pop();
 		}
 	}
+
+	return postfix;
 }
 
 /**********************************************************************
@@ -181,40 +212,4 @@ bool hasHigherPriority(char top, char current) {
 	if(topWeight < currentWeight)
 		return false; 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
