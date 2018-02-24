@@ -19,7 +19,6 @@
 #include <string>
 #include "functions.h"
 
-
 /**********************************************************************
  * Helper method for the iToP function to determine the order of
  * operations.
@@ -179,11 +178,12 @@ std::string iToP(std::string input) {
 		else
 			postfix += input[i];
 		
-		/* Puts the remaning operators into the string. */
-		while(!Operators.empty()) {
-			postfix += Operators.top();
-			Operators.pop();
 		}
+		
+	/* Puts the remaning operators into the string. */
+	while(!Operators.empty()) {
+		postfix += Operators.top();
+		Operators.pop();
 	}
 
 	return postfix;
@@ -221,10 +221,10 @@ bool hasHigherPriority(char top, char current) {
 	if(topWeight == currentWeight) 
 		return true;
 
-	if(topWeight > currentWeight)
+	else if (topWeight > currentWeight)
 		return true;
 
-	if(topWeight < currentWeight)
+	else
 		return false; 
 }
 
