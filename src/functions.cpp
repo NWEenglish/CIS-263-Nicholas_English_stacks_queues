@@ -19,6 +19,19 @@
 #include <string>
 #include <"functions.h">
 
+
+/**********************************************************************
+ * Helper method for the iToP function to determine the order of
+ * operations.
+ *
+ * @param top holds the character of the current top item in the stack.
+ * @param current hold the current character to be compared to the top
+ * 	  item in the stack.
+ * @return bool return's if the top character has higher priority.
+ *********************************************************************/
+bool hasHigherPriority(char top, char current);
+
+/* Main */
 int main(int argc, char** argv) {
 	/* Variable(s) */
 	int choice;	// Holds the user's choice of operation.
@@ -125,14 +138,76 @@ std::string iToP(std::string input) {
 
 		/* Scans each character. */
 		if(input[i] == '+' || input[i] == '-' || input[i] == '*' || input[i] == '/') {
-
-}
+			
+		}
 	}
-
-	/* Prints the converted expression. */
-	std::cout << "\n\n The expression convert to postfix would be:" << std::endl;
-	std::cout << postfix;
 }
+
+/**********************************************************************
+* Helper method for the iToP function to determine the order of
+* operations.
+*
+* @param top holds the character of the current top item in the stack.
+* @param current hold the current character to be compared to the top
+*        item in the stack.
+* @return bool return's if the top character has higher priority.
+*********************************************************************/
+bool hasHigherPriority(char top, char current) {
+	
+	/* Variable(s) */
+	int topWeight;
+	int currentWeight;
+
+	/* Sets a weight system to the characters. */
+	// Multiplication and Division will be assigned 2.
+	// Addition and Subtration will be assigned 1.
+	if(top == '*' || top == '/')
+		topWeight = 2;
+	else
+		topWeight = 1;
+	
+	if(current == '*' || current = '/')
+		currentWeight = 2;
+	else
+		currentWeight = 1;
+	
+	/* Compares the top to the current character. */
+	if(topWeight == currentWeight) 
+		return true;
+
+	if(topWeight > currentWeight)
+		return true;
+
+	if(topWeight < currentWeight)
+		return false; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
